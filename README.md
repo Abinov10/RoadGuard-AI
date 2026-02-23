@@ -1,6 +1,6 @@
 # MARGAM AI – Tamil Nadu Climate-Aware Road Risk Monitoring System
 
-A modular full-stack web system for AI-based road damage detection and district-level risk monitoring across Tamil Nadu.
+A modular full-stack web system for AI-based road damage detection and district-level risk monitoring across Tamil Nadu. (Hackathon Project)
 
 ## Tech Stack
 
