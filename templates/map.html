@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Map – MARGAM AI{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+{% endblock %}
+{% block content %}
+<section class="map-section">
+    <div class="container map-container">
+        <h1 class="page-title" data-en="Tamil Nadu Road Risk Map" data-ta="தமிழ்நாடு சாலை அபாய வரைபடம்">Tamil Nadu Road Risk Map</h1>
+        <div class="map-controls">
+            <label for="districtFilter" data-en="Filter by District" data-ta="மாவட்டத்தால் வடிகட்டு">Filter by District</label>
+            <select id="districtFilter">
+                <option value="">All Districts</option>
+                {% for d in districts %}
+                <option value="{{ d }}">{{ d }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="map" class="map"></div>
+        <div class="map-legend">
+            <span class="legend-item critical" data-en="Critical" data-ta="முக்கிய">Critical</span>
+            <span class="legend-item high" data-en="High" data-ta="அதிகம்">High</span>
+            <span class="legend-item medium" data-en="Medium" data-ta="நடுத்தரம்">Medium</span>
+            <span class="legend-item low" data-en="Low" data-ta="குறைவு">Low</span>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Upload – MARGAM AI{% endblock %}
+{% block content %}
+<section class="upload-section">
+    <div class="container">
+        <h1 class="page-title" data-en="Road Damage Image Upload" data-ta="சாலை சேதம் பட பதிவேற்று">Road Damage Image Upload</h1>
+        <p class="page-desc" data-en="Upload a road image for AI-based pothole and crack detection." data-ta="ஏஐ அடிப்படையிலான குழி மற்றும் வெடிப்பு கண்டறிதலுக்கு சாலை படத்தை பதிவேற்று.">Upload a road image for AI-based pothole and crack detection.</p>
+        <form id="uploadForm" class="upload-form">
+            <div class="form-group">
+                <label for="district" data-en="District" data-ta="மாவட்டம்">District</label>
+                <select id="district" name="district" required>
+                    {% for d in districts %}
+                    <option value="{{ d }}">{{ d }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="latitude" data-en="Latitude (optional)" data-ta="அட்சரேகை (விரும்பினால்)">Latitude (optional)</label>
+                    <input type="number" step="any" id="latitude" name="latitude" placeholder="e.g. 13.0827">
+                </div>
+                <div class="form-group">
+                    <label for="longitude" data-en="Longitude (optional)" data-ta="தீர்க்கரேகை (விரும்பினால்)">Longitude (optional)</label>
+                    <input type="number" step="any" id="longitude" name="longitude" placeholder="e.g. 80.2707">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="traffic" data-en="Traffic Volume" data-ta="போக்குவரத்து அளவு">Traffic Volume</label>
+                <select id="traffic" name="traffic_volume">
+                    <option value="low" data-en="Low" data-ta="குறைவு">Low</option>
+                    <option value="medium" selected data-en="Medium" data-ta="நடுத்தரம்">Medium</option>
+                    <option value="high" data-en="High" data-ta="அதிகம்">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file" data-en="Image File" data-ta="பட கோப்பு">Image File</label>
+                <input type="file" id="file" name="file" accept=".png,.jpg,.jpeg,.webp" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn" data-en="Upload & Detect" data-ta="பதிவேற்று மற்றும் கண்டறி">Upload & Detect</button>
+        </form>
+        <div id="result" class="result-box" hidden></div>
+    </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}

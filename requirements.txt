@@ -1,0 +1,18 @@
+# MARGAM AI - Tamil Nadu Climate-Aware Road Risk Monitoring System
+# Backend & API
+Flask==3.0.0
+Flask-CORS==4.0.0
+pymongo==4.6.1
+python-dotenv==1.0.0
+
+# AI / Computer Vision
+ultralytics==8.1.0
+opencv-python-headless==4.9.0.80
+Pillow==10.2.0
+numpy==1.26.3
+
+# File handling
+Werkzeug==3.0.1
+
+# Utilities
+python-dateutil==2.8.2

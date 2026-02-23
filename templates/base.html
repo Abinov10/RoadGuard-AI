@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MARGAM AI{% endblock %} – Tamil Nadu Climate-Aware Road Risk Monitoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="/" class="logo">MARGAM AI</a>
+            <p class="tagline" data-en="Tamil Nadu Climate-Aware Road Risk Monitoring" data-ta="தமிழ்நாடு காலநிலை விழிப்பு சாலை அபாய கண்காணிப்பு">Tamil Nadu Climate-Aware Road Risk Monitoring</p>
+            <nav class="nav">
+                <a href="/api/upload-page" class="nav-link" data-en="Upload" data-ta="பதிவேற்று">Upload</a>
+                <a href="/detections/map" class="nav-link" data-en="Map" data-ta="வரைபடம்">Map</a>
+                <a href="/admin/" class="nav-link" data-en="Admin" data-ta="நிர்வாகி">Admin</a>
+            </nav>
+            <button type="button" class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                <span data-en="தமிழ்" data-ta="English">தமிழ்</span>
+            </button>
+        </div>
+    </header>
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <span data-en="MARGAM AI – Tamil Nadu Government" data-ta="மார்கம் ஏஐ – தமிழ்நாடு அரசு">MARGAM AI – Tamil Nadu Government</span>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

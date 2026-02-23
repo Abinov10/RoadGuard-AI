@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Admin – MARGAM AI{% endblock %}
+{% block extra_css %}{% endblock %}
+{% block content %}
+<section class="admin-section">
+    <div class="container">
+        <h1 class="page-title" data-en="Admin Dashboard" data-ta="நிர்வாக டாஷ்போர்டு">Admin Dashboard</h1>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value" id="totalDetections">0</span>
+                <span class="stat-label" data-en="Total Detections" data-ta="மொத்த கண்டறிதல்">Total Detections</span>
+            </div>
+        </div>
+        <div class="charts-row">
+            <div class="chart-card">
+                <h3 data-en="Detections by District" data-ta="மாவட்டம் வாரியாக கண்டறிதல்">Detections by District</h3>
+                <canvas id="districtChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3 data-en="Risk Level Distribution" data-ta="அபாய அளவு விநியோகம்">Risk Level Distribution</h3>
+                <canvas id="riskChart"></canvas>
+            </div>
+        </div>
+        <div class="charts-row">
+            <div class="chart-card">
+                <h3 data-en="Maintenance Workflow Status" data-ta="பராமரிப்பு பணி நிலை">Maintenance Workflow Status</h3>
+                <canvas id="maintenanceChart"></canvas>
+            </div>
+        </div>
+        <div class="maintenance-table">
+            <h3 data-en="Maintenance Workflows" data-ta="பராமரிப்பு பணிகள்">Maintenance Workflows</h3>
+            <div class="table-controls">
+                <label for="maintDistrict" data-en="District" data-ta="மாவட்டம்">District</label>
+                <select id="maintDistrict">
+                    <option value="">All</option>
+                    {% for d in districts %}
+                    <option value="{{ d }}">{{ d }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-en="ID" data-ta="அடையாளம்">ID</th>
+                            <th data-en="District" data-ta="மாவட்டம்">District</th>
+                            <th data-en="Status" data-ta="நிலை">Status</th>
+                            <th data-en="Actions" data-ta="செயல்கள்">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maintTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
