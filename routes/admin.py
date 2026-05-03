@@ -1,5 +1,5 @@
 """
-MARGAM AI - Admin Dashboard
+RoadGuard AI - Admin Dashboard
 """
 from flask import Blueprint, render_template, jsonify, request
 from db import get_collection, TAMIL_NADU_DISTRICTS

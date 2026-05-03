@@ -1,5 +1,5 @@
 """
-MARGAM AI - Detections & Map Data API
+RoadGuard AI - Detections & Map Data API
 """
 from flask import Blueprint, jsonify, request, render_template
 from bson import ObjectId

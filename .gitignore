@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+*.pyc
+static/uploads/
+scratch/
+.env
+*.pt

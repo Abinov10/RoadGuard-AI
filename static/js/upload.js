@@ -1,5 +1,5 @@
 /**
- * MARGAM AI – Upload form handler
+ * RoadGuard AI – Upload form handler
  */
 (function () {
   const form = document.getElementById('uploadForm');

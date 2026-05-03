@@ -1,5 +1,5 @@
 """
-MARGAM AI - General API endpoints
+RoadGuard AI - General API endpoints
 """
 from flask import Blueprint, jsonify, render_template
 from db import get_collection, TAMIL_NADU_DISTRICTS

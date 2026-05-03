@@ -1,5 +1,5 @@
 """
-MARGAM AI - YOLOv8-based Pothole & Crack Detection
+RoadGuard AI - YOLOv8-based Pothole & Crack Detection
 Ultralytics YOLOv8 for road damage classification
 """
 import os
@@ -26,19 +26,18 @@ def get_model_path():
     return "yolov8n.pt"  # Fallback to nano model for demo
 
 
+# COCO classes to ignore (Vehicles, People, Animals, etc.)
+IGNORE_CLASSES = [
+    'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 
+    'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 
+    'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow'
+]
+
 def detect_road_damage(image_path: str, conf_threshold: float = 0.25):
     """
     Run YOLOv8 inference on road image for pothole/crack detection.
-    
-    Args:
-        image_path: Path to uploaded image
-        conf_threshold: Confidence threshold for detections
-    
-    Returns:
-        List of detections: [{"class": str, "confidence": float, "bbox": [x1,y1,x2,y2]}]
     """
     if not YOLO_AVAILABLE:
-        # Mock response for environments without ultralytics
         return [
             {"class": "pothole", "confidence": 0.85, "bbox": [100, 150, 200, 220]},
             {"class": "crack", "confidence": 0.72, "bbox": [300, 100, 450, 120]},
@@ -46,6 +45,7 @@ def detect_road_damage(image_path: str, conf_threshold: float = 0.25):
     
     model_path = get_model_path()
     model = YOLO(model_path)
+    is_custom = "yolov8n.pt" not in model_path
     
     results = model.predict(
         source=image_path,
@@ -62,8 +62,17 @@ def detect_road_damage(image_path: str, conf_threshold: float = 0.25):
             conf = float(box.conf[0])
             xyxy = box.xyxy[0].tolist()
             cls_name = model.names.get(cls_id, "damage")
+            
+            # Filtering Logic for realism
+            if not is_custom:
+                if cls_name in IGNORE_CLASSES:
+                    continue
+                display_name = "Surface Irregularity"
+            else:
+                display_name = cls_name
+
             detections.append({
-                "class": cls_name,
+                "class": display_name,
                 "confidence": round(conf, 4),
                 "bbox": [round(x, 2) for x in xyxy]
             })

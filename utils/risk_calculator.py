@@ -1,5 +1,5 @@
 """
-MARGAM AI - Tamil Nadu Composite Road Risk Score (CRRS)
+RoadGuard AI - Tamil Nadu Composite Road Risk Score (CRRS)
 Climate-aware risk scoring for district-level prioritization
 """
 from db import TAMIL_NADU_DISTRICTS

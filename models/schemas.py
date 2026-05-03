@@ -1,5 +1,5 @@
 """
-MARGAM AI - MongoDB document schemas (structure reference)
+RoadGuard AI - MongoDB document schemas (structure reference)
 District-level compatible for Tamil Nadu
 """
 from datetime import datetime

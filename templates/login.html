@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RoadGuard AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .login-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        #otp-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 24px;
+            margin: 0 5px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-dark">
+    <div class="login-container glass">
+        <h1 class="mb-4">RoadGuard AI</h1>
+        <p class="text-muted mb-4">Secure Access Gateway</p>
+
+        <div class="login-tabs">
+            <div id="tab-user" class="tab active" onclick="setRole('user')">User</div>
+            <div id="tab-admin" class="tab" onclick="setRole('admin')">Admin</div>
+        </div>
+
+        <form id="login-form">
+            <input type="hidden" id="role" name="role" value="user">
+            <div class="form-group text-left mb-3">
+                <label>Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+            </div>
+            <div class="form-group text-left mb-4">
+                <label>Password</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <button type="button" class="btn-primary w-100" onclick="generateOTP()">Get Access Code</button>
+        </form>
+
+        <div id="otp-section">
+            <p class="mb-3">A verification code has been sent to your email.</p>
+            <div class="d-flex justify-content-center mb-4">
+                <input type="text" maxlength="1" class="otp-input" onkeyup="moveFocus(this, 1)">
+                <input type="text" maxlength="1" class="otp-input" onkeyup="moveFocus(this, 2)">
+                <input type="text" maxlength="1" class="otp-input" onkeyup="moveFocus(this, 3)">
+                <input type="text" maxlength="1" class="otp-input" onkeyup="moveFocus(this, 0)">
+            </div>
+            <button class="btn-primary w-100" onclick="verifyOTP()">Verify & Login</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedRole = 'user';
+        let generatedCode = '';
+
+        function setRole(role) {
+            selectedRole = role;
+            document.getElementById('role').value = role;
+            document.getElementById('tab-user').classList.toggle('active', role === 'user');
+            document.getElementById('tab-admin').classList.toggle('active', role === 'admin');
+        }
+
+        function generateOTP() {
+            const email = document.getElementById('email').value;
+            if (!email) return alert("Please enter email");
+
+            // Simulation: Generate a random 4 digit code
+            generatedCode = Math.floor(1000 + Math.random() * 9000).toString();
+            console.log("SIMULATED EMAIL SENT TO", email, "CODE:", generatedCode);
+            alert("Check console for the verification code (Simulated email): " + generatedCode);
+
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('otp-section').style.display = 'block';
+        }
+
+        function moveFocus(el, next) {
+            if (el.value.length === 1 && next !== 0) {
+                document.querySelectorAll('.otp-input')[next - 1].focus();
+            }
+        }
+
+        async function verifyOTP() {
+            let enteredCode = "";
+            document.querySelectorAll('.otp-input').forEach(input => enteredCode += input.value);
+
+            if (enteredCode === generatedCode) {
+                const email = document.getElementById('email').value;
+                const resp = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, role: selectedRole })
+                });
+
+                if (resp.ok) {
+                    window.location.href = selectedRole === 'admin' ? '/dashboard' : '/';
+                }
+            } else {
+                alert("Invalid verification code.");
+            }
+        }
+    </script>
+</body>
+
+</html>

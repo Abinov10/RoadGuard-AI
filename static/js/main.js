@@ -1,5 +1,5 @@
 /**
- * MARGAM AI – Tamil language toggle support
+ * RoadGuard AI – Tamil language toggle support
  */
 (function () {
   const langToggle = document.getElementById('langToggle');

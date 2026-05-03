@@ -1,5 +1,5 @@
 """
-MARGAM AI - MongoDB Database Connection & Config
+RoadGuard AI - MongoDB Database Connection & Config
 Tamil Nadu district-aware schema support
 """
 from pymongo import MongoClient
@@ -11,7 +11,7 @@ load_dotenv()
 
 # MongoDB connection
 MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
-DB_NAME = os.getenv("MONGODB_DB", "margam_ai")
+DB_NAME = os.getenv("MONGODB_DB", "roadguard_ai")
 
 # Tamil Nadu districts (38 districts) - for scalable district-level handling
 TAMIL_NADU_DISTRICTS = [

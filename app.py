@@ -1,5 +1,5 @@
 """
-MARGAM AI – Tamil Nadu Climate-Aware Road Risk Monitoring System
+RoadGuard AI – Tamil Nadu Climate-Aware Road Risk Monitoring System
 Main Flask Application Entry Point
 """
 import os
@@ -20,7 +20,7 @@ def create_app():
     app = Flask(__name__, template_folder="templates", static_folder="static")
     
     # Config
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "margam-ai-secret-key-change-in-production")
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "roadguard-ai-secret-key-change-in-production")
     app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16MB max upload
     app.config["UPLOAD_FOLDER"] = os.path.join(app.static_folder, "uploads")
     

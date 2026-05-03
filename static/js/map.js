@@ -1,5 +1,5 @@
 /**
- * MARGAM AI – Tamil Nadu Leaflet map visualization
+ * RoadGuard AI – Tamil Nadu Leaflet map visualization
  */
 (function () {
   const mapEl = document.getElementById('map');

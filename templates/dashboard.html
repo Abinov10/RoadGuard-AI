@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadGuard AI - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>RoadGuard AI <small style="font-size: 0.5em; opacity: 0.7;">(Admin Dashboard)</small></h1>
+                <p data-i18n="tagline_dashboard">Tamil Nadu Road Maintenance Intelligence</p>
+            </div>
+            <nav>
+                <a href="/logout" style="color: #ef4444; margin-right: 20px;">Logout</a>
+                <a href="/" data-i18n="nav_upload">Upload</a>
+                <a href="/dashboard" class="active" data-i18n="nav_dashboard">Dashboard</a>
+                <select id="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="ta">தமிழ் (Tamil)</option>
+                    <option value="hi">हिंदी (Hindi)</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-grid">
+            <div class="main-stats">
+                <div class="map-container glass">
+                    <div id="map"></div>
+                    <button class="btn-secondary heatmap-toggle" onclick="toggleHeatmap()"
+                        data-i18n="btn_heatmap">Toggle Heatmap</button>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="consultancy-section glass">
+                    <h3>Priority Repair List</h3>
+                    <p class="text-muted mb-3"><small>Resource Optimization Service for Contractors</small></p>
+                    <div id="priority-list">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+
+                <div class="chart-container glass">
+                    <h3 data-i18n="label_risk_distribution">Risk Level Distribution</h3>
+                    <canvas id="risk-chart"></canvas>
+                </div>
+
+                <div class="chart-container glass mt-3">
+                    <h3 data-i18n="label_district_avg">District-wise Avg Risk</h3>
+                    <canvas id="district-chart"></canvas>
+                </div>
+
+                <div class="stats-card glass mt-3 p-3 text-center">
+                    <h4 data-i18n="label_maintenance_efficiency">Maintenance Efficiency</h4>
+                    <p id="avg-repair-time" class="h2 text-primary">--</p>
+                    <small data-i18n="label_avg_repair_time">Avg Repair Time:</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>

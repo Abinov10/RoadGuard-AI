@@ -1,4 +1,4 @@
-# MARGAM AI - Tamil Nadu Climate-Aware Road Risk Monitoring System
+# RoadGuard AI - Tamil Nadu Climate-Aware Road Risk Monitoring System
 # Backend & API
 Flask==3.0.0
 Flask-CORS==4.0.0

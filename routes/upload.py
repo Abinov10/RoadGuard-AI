@@ -1,5 +1,5 @@
 """
-MARGAM AI - Image Upload & AI Detection API
+RoadGuard AI - Image Upload & AI Detection API
 """
 import os
 import uuid

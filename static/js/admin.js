@@ -1,5 +1,5 @@
 /**
- * MARGAM AI – Admin dashboard Chart.js analytics
+ * RoadGuard AI – Admin dashboard Chart.js analytics
  */
 (function () {
   const totalEl = document.getElementById('totalDetections');
